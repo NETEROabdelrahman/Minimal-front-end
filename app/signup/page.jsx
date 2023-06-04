@@ -17,9 +17,9 @@ const page = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3008/auth/register', { username, password })
+            const res = await axios.post('https://minimal-dcd9.onrender.com/auth/register', { username, password })
             if (res.statusText == "Created") {
-                const loginRes = await axios.post('http://localhost:3008/auth/login', { username, password })
+                const loginRes = await axios.post('https://minimal-dcd9.onrender.com/auth/login', { username, password })
                 setUserData(loginRes.data)
                 localStorage.setItem('user',JSON.stringify(loginRes.data))
                 //router.push('/')
@@ -33,7 +33,7 @@ const page = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-                const loginRes = await axios.post('http://localhost:3008/auth/login', { username, password })
+                const loginRes = await axios.post('https://minimal-dcd9.onrender.com/auth/login', { username, password })
             setUserData(loginRes.data)
             localStorage.setItem('user',JSON.stringify(loginRes.data))
                 //router.push('/')
