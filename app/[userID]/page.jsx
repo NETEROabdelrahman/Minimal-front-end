@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import Image from "next/image"
+import jwt_decode from "jwt-decode";
 
 
 const Page = () => {
@@ -13,6 +14,8 @@ const Page = () => {
     const [posts, setPosts] = useState([])
 
     const id = usePathname()
+
+    const decodedToken =JSON.parse(localStorage.getItem("user")) && jwt_decode(JSON.parse(localStorage.getItem("user"))?.token);
     
 
     const getAllPosts = async () => {
@@ -53,7 +56,7 @@ const Page = () => {
   return (
     <>
           {posts && <>
-              <MakeApost getAllposts={getAllPosts} creators={creators} userID={id}/>
+              {id.substring(1)==decodedToken?.id&&<MakeApost getAllposts={getAllPosts} creators={creators} userID={id} />}
                 {posts.map(post => {
                     return (
                         
@@ -66,16 +69,17 @@ const Page = () => {
                             <p>{post.post}</p>
                             <div className="container">
                             <p>{post.likes.length} likes</p>
-                                <Image
+                                {id.substring(1)==decodedToken?.id&&<Image
                                     id={post._id}
-                                    alt="like"
+                                    alt="delete"
                                     onClick={handleDelete}
                                     src={require("../../icons/trash.svg")}
                                     width={25}
                                     height={25}
-                                />
+                                    className="trash"
+                                />}
                             </div>
-
+                            <div className="br"></div>
                     </div>
                         )
                 })}

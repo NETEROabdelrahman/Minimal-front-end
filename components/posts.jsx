@@ -1,13 +1,14 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import axios from "axios"
 import Post from "@/components/post";
 import MakeApost from "./makeApost";
+import Loading from "@/app/signup/loading";
 
 const Posts = () => {
     const [creators, setCreators] = useState('')
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
     const [userID, setUserID] = useState('')
     const [limit, setLimit] = useState(5)
 
@@ -45,9 +46,9 @@ const Posts = () => {
         <>
             
             {!posts ?
-                <div>loading...</div>:<div>
+                <Loading/>:<div>
                     <MakeApost getAllposts={getAllposts} creators={creators} userID={userID}/>
-                    
+
                     <Post posts={posts} userID={userID} setUserID={setUserID} getAllposts={getAllposts} />
                                 
                     <p className="fetch-more" onClick={fetchMore}>fetch more?</p>

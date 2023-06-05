@@ -1,19 +1,23 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import axios from "axios"
 import { AiOutlineHeart } from 'react-icons/ai';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { parseISO, formatDistanceToNow } from 'date-fns';
+import Loading from "@/app/signup/loading";
+import Link from "next/link";
+
 
 
 const Post = ({ userID, posts, getAllposts, setUserID }) => {
     
-    const [liked,setLiked] = useState(false)
+    const [liked, setLiked] = useState(false)
 
     const router = useRouter()
 
+    
 
 
     
@@ -22,8 +26,8 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
     useEffect(() => {
         getAllposts()
         if (localStorage.getItem("user")) {
-        setUserID(JSON.parse(localStorage.getItem("user")).userID)
-    }
+            setUserID(JSON.parse(localStorage.getItem("user")).userID)
+        }
     }, [])
     
     
@@ -37,7 +41,7 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
             const res = await axios.put(`https://minimal-dcd9.onrender.com/posts/like/${userID}/${e.target.id}`)
             console.log(res)
             getAllposts()
-            setLiked(prev=>!prev)
+            setLiked(prev => !prev)
         } catch (error) {
             console.log(error)
         }
@@ -49,13 +53,14 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
     
     return (
         <>
+
             {posts && <>
                 {posts.map(post => {
                     return (
                         
                         <div key={post._id} className="post">
                             <div className="name">
-                                <h4>{post.creator?.username}</h4>
+                                <Link className="link" href={post.creator._id}><h4>{post.creator?.username}</h4></Link>
                                 <h6>{formatDistanceToNow(parseISO(post.createdAt))} ago</h6>
 
                             </div>
@@ -68,9 +73,9 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
                                     onClick={like}
                                     width={25}
                                     height={25}
-                                    src={!post.likes.includes(userID) ? require('../icons/heart.svg'):require('../icons/heart2.svg')}
+                                    src={!post.likes.includes(userID) ? require('../icons/heart.svg') : require('../icons/heart2.svg')}
                                 />
-                                <p>{post.likes.length }</p>
+                                <p>{post.likes.length}</p>
                             </div>
                             <div className="br"></div>
 

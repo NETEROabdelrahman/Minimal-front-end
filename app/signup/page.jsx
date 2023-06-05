@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import Loading from "./loading"
 
 const page = () => {
     const router = useRouter()
@@ -11,14 +12,18 @@ const page = () => {
     const [password, setPassword] = useState('')
     const [userData, setUserData] = useState([])
     const [switchLogin, setSwitchLogin] = useState(false)
+    const [loading, setLoading] = useState(false)
+
 
     console.log(userData)
     
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true)
             const res = await axios.post('https://minimal-dcd9.onrender.com/auth/register', { username, password })
-            if (res.statusText == "Created") {
+            console.log(res)
+            if (res.status == 201) {
                 const loginRes = await axios.post('https://minimal-dcd9.onrender.com/auth/login', { username, password })
                 setUserData(loginRes.data)
                 localStorage.setItem('user',JSON.stringify(loginRes.data))
@@ -26,28 +31,36 @@ const page = () => {
                 window.location.replace('/')
             }
         } catch (error) {
+            alert(error.response.data.message)
             console.log(error)
         }
+        setLoading(false)
 
 }
     const handleLogin = async (e) => {
         e.preventDefault();
+        
         try {
-                const loginRes = await axios.post('https://minimal-dcd9.onrender.com/auth/login', { username, password })
+            setLoading(true)
+            const loginRes = await axios.post('https://minimal-dcd9.onrender.com/auth/login', { username, password })
+            console.log(loginRes)
             setUserData(loginRes.data)
             localStorage.setItem('user',JSON.stringify(loginRes.data))
-                //router.push('/')
+                //router.replace('/')
                 window.location.replace('/')
             
         } catch (error) {
-            console.log(error)
-        }
+            alert(error.response.data.message)
+                console.log(error.response.data)
+            }
+             setLoading(false)
 
 }
 
     return (
         <>
-        {!switchLogin?<div className="form-container">
+            {loading ? <Loading /> : <>
+            {!switchLogin?<div className="form-container">
         <p>don't have an account ? <span className="switchLogin" onClick={()=>setSwitchLogin(true)}>sign up</span></p>
       <form >
         <input placeholder="username" type="text" value={username} onChange={e=>setUsername(e.target.value)} />
@@ -64,6 +77,8 @@ const page = () => {
       </form>
       <button onClick={handleRegister}>register</button>
       </div>}
+            </>}
+        
         </>
         
   )
