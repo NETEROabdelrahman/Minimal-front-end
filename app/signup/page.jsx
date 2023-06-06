@@ -21,10 +21,10 @@ const page = () => {
         e.preventDefault();
         try {
             setLoading(true)
-            const res = await axios.post('https://minimal-dcd9.onrender.com/auth/register', { username, password })
+            const res = await axios.post('https://minimal-2.onrender.com/auth/register', { username, password })
             console.log(res)
             if (res.status == 201) {
-                const loginRes = await axios.post('https://minimal-dcd9.onrender.com/auth/login', { username, password })
+                const loginRes = await axios.post('https://minimal-2.onrender.com/auth/login', { username, password })
                 setUserData(loginRes.data)
                 localStorage.setItem('user',JSON.stringify(loginRes.data))
                 //router.push('/')
@@ -42,7 +42,7 @@ const page = () => {
         
         try {
             setLoading(true)
-            const loginRes = await axios.post('https://minimal-dcd9.onrender.com/auth/login', { username, password })
+            const loginRes = await axios.post('https://minimal-2.onrender.com/auth/login', { username, password })
             console.log(loginRes)
             setUserData(loginRes.data)
             localStorage.setItem('user',JSON.stringify(loginRes.data))

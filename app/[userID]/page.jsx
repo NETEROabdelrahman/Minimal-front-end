@@ -12,7 +12,6 @@ import jwt_decode from "jwt-decode";
 const Page = () => {
     const [creators, setCreators] = useState([])
     const [posts, setPosts] = useState([])
-
     const id = usePathname()
 
     const decodedToken =JSON.parse(localStorage.getItem("user")) && jwt_decode(JSON.parse(localStorage.getItem("user"))?.token);
@@ -20,7 +19,7 @@ const Page = () => {
 
     const getAllPosts = async () => {
         try {
-            const res = await axios.get(`https://minimal-dcd9.onrender.com/users${id}`)
+            const res = await axios.get(`https://minimal-2.onrender.com/users${id}`)
             //console.log(res.data)
             setCreators(res.data)
             setPosts(res.data.posts)
@@ -33,7 +32,7 @@ const Page = () => {
     const handleDelete = async(e) => {
         e.preventDefault()
         try {
-            await axios.delete(`https://minimal-dcd9.onrender.com/posts${id}/${e.target.id}`,
+            await axios.delete(`https://minimal-2.onrender.com/posts${id}/${e.target.id}`,
                 {
                     headers: {
                         token:
@@ -68,7 +67,10 @@ const Page = () => {
                             </div>
                             <p>{post.post}</p>
                             <div className="container">
-                            <p>{post.likes.length} likes</p>
+                                <p className="like">{post.likes.length} likes
+                                <div className="like-box">{post.likes.map(like => <div>{like.username}</div>) }</div>
+
+                                </p>
                                 {id.substring(1)==decodedToken?.id&&<Image
                                     id={post._id}
                                     alt="delete"

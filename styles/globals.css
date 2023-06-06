@@ -98,6 +98,27 @@ ul{
   align-items: center;
   gap: 10px;
 }
+.like{
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+
+}
+.like-box{
+  position: absolute;
+  background-color: #181823;
+  border-radius: 5px;
+  color: white;
+  display: none;
+  padding: 6px;
+  transition: 0.3s;
+
+}
+
+.like:hover .like-box{
+display: flex;
+flex-direction: column;
+}
 .teaxt-area-container{
   display: flex;
   justify-content: space-around;
@@ -142,7 +163,14 @@ button:hover{
 .trash{
   cursor: pointer;
 }
-
+.modal-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #181823;
+}
 
 
 .lds-roller {

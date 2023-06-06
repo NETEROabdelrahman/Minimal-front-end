@@ -5,6 +5,7 @@ import axios from "axios"
 import Post from "@/components/post";
 import MakeApost from "./makeApost";
 import Loading from "@/app/signup/loading";
+import Modal from "./modal";
 
 const Posts = () => {
     const [creators, setCreators] = useState('')
@@ -22,7 +23,7 @@ const Posts = () => {
 
     const getAllposts = async () => {
         try {
-            const res = await axios.get(`https://minimal-dcd9.onrender.com/posts?limit=${limit}`)
+            const res = await axios.get(`https://minimal-2.onrender.com/posts?limit=${limit}`)
             setPosts(res.data)
         } catch (error) {
             console.log(error)
@@ -55,6 +56,7 @@ const Posts = () => {
                     
                 </div>
             }
+
         </>
     )
 };

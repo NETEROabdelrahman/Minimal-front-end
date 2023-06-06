@@ -8,6 +8,7 @@ import Image from "next/image";
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import Loading from "@/app/signup/loading";
 import Link from "next/link";
+import Modal from "./modal";
 
 
 
@@ -18,7 +19,6 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
     const router = useRouter()
 
     
-
 
     
     
@@ -38,7 +38,7 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
         }
 
         try {
-            const res = await axios.put(`https://minimal-dcd9.onrender.com/posts/like/${userID}/${e.target.id}`)
+            const res = await axios.put(`https://minimal-2.onrender.com/posts/like/${userID}/${e.target.id}`)
             console.log(res)
             getAllposts()
             setLiked(prev => !prev)
@@ -46,6 +46,8 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
             console.log(error)
         }
     }
+
+    
 
 
 
@@ -73,9 +75,15 @@ const Post = ({ userID, posts, getAllposts, setUserID }) => {
                                     onClick={like}
                                     width={25}
                                     height={25}
-                                    src={!post.likes.includes(userID) ? require('../icons/heart.svg') : require('../icons/heart2.svg')}
+                                    src={!post.likes.map(like => like._id).includes(userID) ? require('../icons/heart.svg') : require('../icons/heart2.svg')}
                                 />
-                                <p>{post.likes.length}</p>
+                                <div
+                                    className="like"
+                                    id={post._id}
+                                >{post.likes.length}
+                                    <div className="like-box">{post.likes.map(like => <div>{like.username}</div>) }</div>
+                                </div>
+                                
                             </div>
                             <div className="br"></div>
 

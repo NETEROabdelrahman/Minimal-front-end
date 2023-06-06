@@ -20,7 +20,7 @@ const MakeApost = ({userID,creators,getAllposts}) => {
             router.push('/signup')
         }
         try {
-            const res = await axios.post(`https://minimal-dcd9.onrender.com/posts/${userID}`,  {post} , {
+            const res = await axios.post(`https://minimal-2.onrender.com/posts/${userID}`,  {post} , {
                 headers: {
                     token:
                         `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
