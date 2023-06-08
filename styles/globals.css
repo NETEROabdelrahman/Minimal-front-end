@@ -20,6 +20,7 @@ li{
 .link{
   text-decoration: none;
   color: var(--blue-color);
+  margin-right: 5px;
 }
 html{
   font-family: Arial, Helvetica, sans-serif;
@@ -42,6 +43,104 @@ nav{
   justify-content: space-between;
   padding: 10px;
 }
+.search-container{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.3s ease-in-out 0s;
+}
+.search-container-reveal{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  transition: width 0.3s ease-in-out 0s;
+}
+.search{
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  display: none;
+  transition: width 0.3s ease-in-out 0s;
+  width: 0px;
+}
+.search-reveal{
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  border: none;
+  outline: none;
+  transition: width 0.3s ease-in-out 0s;
+  width: 80%;
+}
+.search-glasses{
+  cursor: pointer;
+}
+.search-glasses:hover{
+  width: 30px;
+  height: 30px;
+  transition: width 0.3s ease-in-out 0s;
+}
+.search-value-container{
+  display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.searched-users{
+  left: 0;
+    position: absolute;
+    top: 36px;
+    background-color: white;
+    width: 100%;
+    padding:0 10px;
+    border-radius: 0px 5px 5px 5px;
+    color: var(--blue-color);
+}
+.searched-users div:not(:first-child) h5:after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0.1px;
+  background-color: #18182379;
+  left: 0;
+  margin: -7.5px 0px
+}
+.searched-users h5{
+  margin: 15px 0;
+}
+.all-results{
+  padding: 10px;
+}
+.full-search-reveal {
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  border: none;
+  outline: none;
+  transition: width 0.3s ease-in-out 0s;
+  width: 100%;
+}
+.full-search{
+  background-color: white;
+  padding: 10px;
+  font-size: 25px;
+}
+.full-search h5{
+  padding: 10px;
+}
+.full-search-container{
+  position: relative;
+}
+.full-search div:not(:first-child) h5:after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0.1px;
+  background-color: #18182379;
+  left: 0;
+  margin: -25px 0px
+}
 .post{
   margin: 10px;
   padding: 10px;
@@ -52,9 +151,10 @@ nav{
   gap: 10px;
 }
 .br{
-  background-color: var(--white-color);
-  width: 100%;
-  height: 1px;
+  background-color: #4c3e7642;
+    width: 100%;
+    height: 0.1px;
+    margin: 10px 0;
 }
 .form-container{
   display: flex;
@@ -69,7 +169,7 @@ form{
   align-items: center;
   flex-direction: column;
   gap: 10px;
-  margin: 100px auto;
+  margin: 135px auto;
 }
 form input{
   padding: 15px;
@@ -101,7 +201,7 @@ ul{
 .like{
   position: relative;
   cursor: pointer;
-  transition: 0.3s;
+  transition: width 0.3s ease-in-out 0s;
 
 }
 .like-box{
