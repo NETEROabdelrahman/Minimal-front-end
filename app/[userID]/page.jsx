@@ -19,7 +19,7 @@ const Page = () => {
 
     const getAllPosts = async () => {
         try {
-            const res = await axios.get(`http://localhost:3008/users${id}`)
+            const res = await axios.get(`https://minimal-2.onrender.com/users${id}`)
             //console.log(res.data)
             setCreators(res.data)
             setPosts(res.data.posts)
@@ -32,7 +32,7 @@ const Page = () => {
     const handleDelete = async(e) => {
         e.preventDefault()
         try {
-            await axios.delete(`http://localhost:3008/posts${id}/${e.target.id}`,
+            await axios.delete(`https://minimal-2.onrender.com/posts${id}/${e.target.id}`,
                 {
                     headers: {
                         token:

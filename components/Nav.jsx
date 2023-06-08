@@ -41,7 +41,7 @@ const Nav = () => {
     if (e.target.value) {
         
       try {
-        const res = await axios.get(`http://localhost:3008/users/search/${e.target.value}?limit=${limit}`)
+        const res = await axios.get(`https://minimal-2.onrender.com/users/search/${e.target.value}?limit=${limit}`)
         setSearchedUsers(res.data)
         console.log(res)
       } catch (error) {

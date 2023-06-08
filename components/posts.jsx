@@ -20,7 +20,7 @@ const Posts = () => {
     
     const getAllposts = async () => {
         try {
-            const res = await axios.get(`http://localhost:3008/posts?limit=${limit}`)
+            const res = await axios.get(`https://minimal-2.onrender.com/posts?limit=${limit}`)
             
             setPosts(res.data)
                 

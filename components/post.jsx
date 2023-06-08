@@ -31,7 +31,7 @@ const Post = ({ userID, posts, getAllposts, setUserID, limit }) => {
         if (e.target.value) {
             
             try {
-                const res = await axios.get(`http://localhost:3008/posts/search/${e.target.value}?limit=${limit}`)
+                const res = await axios.get(`https://minimal-2.onrender.com/posts/search/${e.target.value}?limit=${limit}`)
                 setSearchedPosts(res.data)
                 console.log(res.data)
             } catch (error) {
@@ -63,7 +63,7 @@ const Post = ({ userID, posts, getAllposts, setUserID, limit }) => {
         }
 
         try {
-            const res = await axios.put(`http://localhost:3008/posts/like/${userID}/${e.target.id}`)
+            const res = await axios.put(`https://minimal-2.onrender.com/posts/like/${userID}/${e.target.id}`)
             console.log(res)
             getAllposts()
             setLiked(prev => !prev)
